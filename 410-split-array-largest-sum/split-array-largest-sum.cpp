@@ -1,67 +1,62 @@
 class Solution {
 public:
-
-    bool is_valid(vector<int> nums,int n,int m,int max){
-            n=nums.size();
-            int pages=0;
-            int stu=1;
-            for(int i=0;i<n;i++){
-                if(nums[i]>max){
-                    return false;
-                }
-            
-                if(pages+nums[i]<=max){
-                    pages=pages+nums[i];
-                }
-                else{
-                    stu++;
-                    pages=nums[i];
-                }
-            }
-            if(stu>m){
+    bool is_valid(vector<int>arr,int n,int k,int max){
+        int s=1;
+        int pages=0;
+        for(int i=0;i<n;i++){
+            if(arr[i]>max){
                 return false;
             }
-            if(stu<=m){
-                return true;
+            if(pages+arr[i]<=max){
+                pages=pages+arr[i];
             }
-            return 0;
+            else{
+                s++;
+                pages=arr[i];
+            }
+        }
+        if(s>k){
+            return false;
+        }
+        else{
+            return true;
+        }
+        
+    };
+    int split(vector<int>arr,int n,int k){
+        int ans=-1;
+        int sum=0;
+        if(n<k){
+            return -1;
         }
 
-    int allocate_books(vector<int>nums,int n,int m){
-            if(m>n){
-                return -1;
+        for(int i=0;i<n;i++){
+            sum=sum+arr[i];
+
+        }
+        
+        int start=0;
+        int end=sum; 
+        while(start<=end){
+            int mid=start+(end-start)/2;
+            if(is_valid(arr,arr.size(),k,mid)){
+                ans=mid;
+                end=mid-1;
+                
             }
-            int sum=0;
-            for(int i=0;i<n;i++){
-                sum=sum+nums[i];
+
+            else{
+                start=mid+1;
             }
-            int ans=-1;
-            int st=0;
-            int end=sum;
-            while(st<=end){
-                int mid=st+(end-st)/2;
-                if(is_valid(nums,n,m,mid)){
-                    ans=mid;
-                    end=mid-1;
-                }
-                else{
-                    st=mid+1;
-                }
-            }
-            return ans;
+        }
+        return ans;
     };
 
+
+
     int splitArray(vector<int>& nums, int k) {
+        return split(nums,nums.size(),k);
         
-        
-        
-        int n=nums.size();
-        return allocate_books(nums,n,k);
-    
-          
-       
-
-
         
     }
 };
