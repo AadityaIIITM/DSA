@@ -8,19 +8,21 @@ public:
         for(int i=1;i<n;i++){
             if(nums[i]==nums[i-1]){
                 freq++;
-                if(freq>n/2){
-                    return ans;
+            }
+            if(freq>n/2){
+                return ans;
                 }
                 
             
             
-            }
-            else{
+            
+            if(nums[i]!=nums[i-1]){
                 freq=1;
                 ans=nums[i];
             }
         }
         return ans;
+        
         
         
         
