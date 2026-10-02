@@ -1,0 +1,1 @@
+<h2>semi-ordered-permutation Notes</h2><hr>[ Time taken: 3d 16hrs 9m 28s ]
