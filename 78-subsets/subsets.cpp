@@ -1,22 +1,30 @@
 
 
+#include <vector>
+
 class Solution {
 public:
     std::vector<std::vector<int>> subsets(std::vector<int>& nums) {
         std::vector<std::vector<int>> result;
         std::vector<int> current;
-        backtrack(nums, 0, current, result);
+        generateSubsets(0, nums, current, result);
         return result;
     }
 
 private:
-    void backtrack(const std::vector<int>& nums, int start, std::vector<int>& current, std::vector<std::vector<int>>& result) {
-        result.push_back(current);
-        
-        for (int i = start; i < nums.size(); ++i) {
-            current.push_back(nums[i]);
-            backtrack(nums, i + 1, current, result);
-            current.pop_back(); // Backtrack
+    void generateSubsets(int index, const std::vector<int>& nums, std::vector<int>& current, std::vector<std::vector<int>>& result) {
+        // Base case: processed all elements
+        if (index == nums.size()) {
+            result.push_back(current);
+            return;
         }
+
+        // Decision 1: Exclude nums[index]
+        generateSubsets(index + 1, nums, current, result);
+
+        // Decision 2: Include nums[index]
+        current.push_back(nums[index]);
+        generateSubsets(index + 1, nums, current, result);
+        current.pop_back(); // Backtrack to restore state
     }
 };
