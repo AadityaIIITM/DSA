@@ -26,6 +26,7 @@ public:
         return true;
     }
     bool helper(vector<vector<char>>&board,int row,int col){
+      
         if(row==9){
             return true;
         }
@@ -43,13 +44,14 @@ public:
             if(is_safe(board,row,col,dig)){
                 board[row][col]=dig;
                 if(helper(board,next_row,next_col)){
-                    return true;
+                   return true;
                 }
                 board[row][col]='.';
             }
            
         }
         return false;
+       
     }
     void solveSudoku(vector<vector<char>>& board) {
         helper(board,0,0);
