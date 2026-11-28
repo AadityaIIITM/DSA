@@ -13,18 +13,19 @@ public:
 
 private:
     void generateSubsets(int index, const std::vector<int>& nums, std::vector<int>& current, std::vector<std::vector<int>>& result) {
-        // Base case: processed all elements
+       
         if (index == nums.size()) {
             result.push_back(current);
             return;
         }
 
-        // Decision 1: Exclude nums[index]
-        generateSubsets(index + 1, nums, current, result);
-
-        // Decision 2: Include nums[index]
         current.push_back(nums[index]);
         generateSubsets(index + 1, nums, current, result);
-        current.pop_back(); // Backtrack to restore state
+
+        
+       
+       
+        current.pop_back(); 
+         generateSubsets(index + 1, nums, current, result);
     }
 };
